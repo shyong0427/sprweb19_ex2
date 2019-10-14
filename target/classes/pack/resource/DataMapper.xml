@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev">
+
+	<select id="selectDataAll" resultType="pack.model.JikwonDto">
+		select j.jikwon_no,j.jikwon_name,j.buser_num,b.buser_name,j.jikwon_jik,DATE_FORMAT(j.jikwon_ibsail,'%Y년 %c') jikwon_ibsail
+		from jikwon j, buser b 
+		where j.buser_num = b.buser_no order by b.buser_name, j.jikwon_name
+	</select>
+	
+	<select id="selectDataBuser" parameterType="String" resultType="pack.model.JikwonDto">
+		select j.jikwon_no,j.jikwon_name,j.buser_num,b.buser_name,j.jikwon_jik,DATE_FORMAT(j.jikwon_ibsail ,'%Y년 %c') jikwon_ibsail from jikwon j, buser b where j.buser_num = b.buser_no and j.buser_num = "${value}" order by b.buser_name, j.jikwon_name
+	</select>
+	
+	<select id="selectBuser" parameterType="String" resultType="pack.model.BuserDto">
+		select * from buser where buser_no = "${value}"
+	</select>
+</mapper>
